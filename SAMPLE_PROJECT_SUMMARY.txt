@@ -1,0 +1,188 @@
+╔══════════════════════════════════════════════════════════════════╗
+║           UIRouter for KCM - Sample Project Created              ║
+╚══════════════════════════════════════════════════════════════════╝
+
+PROJECT STRUCTURE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+UIRouter-for-KCM/
+├── library/                              # UIRouter library
+│   └── src/commonMain/kotlin/com/kcm/uirouter/
+│       ├── Route.kt
+│       ├── Navigator.kt
+│       ├── NavigationController.kt
+│       ├── RouterHost.kt
+│       ├── TabNavigator.kt
+│       ├── TabRouterHost.kt
+│       ├── Modal.kt
+│       ├── ModalHost.kt
+│       └── ... (11 files total)
+│
+└── sample/                               # ✨ NEW: Demo App
+    ├── build.gradle.kts                  # Sample app configuration
+    ├── README.md                         # App documentation
+    ├── iOS_SETUP.md                      # iOS setup guide
+    ├── DEMO_GUIDE.txt                    # Demo walkthrough
+    ├── src/
+    │   ├── commonMain/kotlin/com/kcm/uirouter/sample/
+    │   │   ├── SampleApp.kt              # Main app entry
+    │   │   ├── Routes.kt                 # Route definitions
+    │   │   ├── screens/                  # 9 screen files
+    │   │   │   ├── HomeScreen.kt
+    │   │   │   ├── DetailsScreen.kt
+    │   │   │   ├── ExploreScreen.kt
+    │   │   │   ├── ItemListScreen.kt
+    │   │   │   ├── ProfileScreen.kt
+    │   │   │   ├── EditProfileScreen.kt
+    │   │   │   ├── SettingsScreen.kt
+    │   │   │   └── ImageViewerScreen.kt
+    │   │   └── components/
+    │   │       └── BottomNavigationBar.kt
+    │   ├── androidMain/
+    │   │   ├── AndroidManifest.xml
+    │   │   └── kotlin/.../MainActivity.kt
+    │   └── iosMain/
+    │       └── kotlin/.../Main.kt
+    └── iosApp/
+        └── iosApp/
+            ├── iOSApp.swift
+            └── Info.plist
+
+FEATURES IMPLEMENTED
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ Tab Navigation
+   • 3 tabs: Home, Explore, Profile
+   • Independent navigation stacks per tab
+   • State preservation on tab switch
+   • Bottom navigation bar with icons
+
+✅ Push/Pop Navigation
+   • HomeScreen → DetailsScreen (with parameters)
+   • ExploreScreen → ItemListScreen (by category)
+   • ProfileScreen → EditProfileScreen
+   • Back button handling
+   • Pop to root functionality
+
+✅ Sheet Modal
+   • Settings screen as sheet modal
+   • Dismissible by tapping outside
+   • Dismissible by button
+   • Works from any tab
+
+✅ Full-Screen Modal
+   • Image viewer as full-screen modal
+   • Custom dismiss button
+   • Black background overlay
+
+✅ Type-Safe Parameters
+   • Details: id, title
+   • ItemList: category
+   • ImageViewer: imageUrl
+
+RUNNING THE SAMPLE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Android (API 34+):
+  cd /Users/istsest/MacProjects/Joon/UIRouter-for-KCM
+  ./gradlew :sample:installDebug
+
+iOS (iOS 16+):
+  # Step 1: Build framework
+  ./gradlew :sample:linkDebugFrameworkIosSimulatorArm64
+
+  # Step 2: Open in Xcode
+  open sample/iosApp/iosApp.xcodeproj
+
+  # Step 3: Select simulator and run (Cmd+R)
+
+DEMO FLOW
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Start on Home tab
+2. Tap "Item 1" → Details screen opens
+3. Tap back → Return to Home
+4. Tap Settings icon → Sheet modal opens
+5. Dismiss sheet → Back to Home
+6. Tap "Open Image Viewer" → Full-screen modal
+7. Dismiss viewer → Back to Home
+8. Switch to Explore tab
+9. Tap "Technology" → Category list opens
+10. Switch to Home tab → Explore state preserved
+11. Return to Explore → Still on category list
+12. Switch to Profile tab
+13. Tap "Edit Profile" → Edit screen opens
+14. Tap "Save Changes" → Back to Profile
+
+TECHNICAL SPECS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Platform Requirements:
+  • Android: API 34+ (Android 14+)
+  • iOS: iOS 16.0+
+
+Dependencies:
+  • Kotlin: 2.1.0
+  • Compose Multiplatform: 1.7.3
+  • Material3: Latest
+  • UIRouter for KCM: project(":library")
+
+Files Created: 24 files
+  • 1 build.gradle.kts
+  • 9 screen files
+  • 2 Android files
+  • 2 iOS files
+  • 3 common files
+  • 4 documentation files
+
+CODE STATISTICS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Kotlin Files: 13
+Lines of Code: ~1,200
+Screens: 9
+Routes: 8
+Tabs: 3
+Modals: 2
+
+TESTING CHECKLIST
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+☐ Android: Build and run successfully
+☐ Android: Test all navigation flows
+☐ Android: Test modals (sheet & full-screen)
+☐ Android: Test back button behavior
+☐ iOS: Build framework successfully
+☐ iOS: Run in simulator
+☐ iOS: Test all navigation flows
+☐ iOS: Test modals (sheet & full-screen)
+☐ iOS: Test swipe back gesture
+
+NEXT STEPS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Build and run on Android
+   ./gradlew :sample:installDebug
+
+2. Build and run on iOS
+   ./gradlew :sample:linkDebugFrameworkIosSimulatorArm64
+   # Then open in Xcode and run
+
+3. Test all features using DEMO_GUIDE.txt
+
+4. Review code in:
+   • sample/src/commonMain/kotlin/com/kcm/uirouter/sample/
+
+5. Customize the sample app for your needs
+
+DOCUMENTATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📖 sample/README.md          - Overview and features
+📖 sample/iOS_SETUP.md       - Detailed iOS setup
+📖 sample/DEMO_GUIDE.txt     - Step-by-step demo
+📖 ../README.md              - Library documentation
+
+╚══════════════════════════════════════════════════════════════════╝
+            Complete Demo App Ready for Testing! 🎉
+╚══════════════════════════════════════════════════════════════════╝

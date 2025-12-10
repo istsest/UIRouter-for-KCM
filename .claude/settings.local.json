@@ -1,0 +1,35 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(chmod:*)",
+      "Bash(for file in *.kt)",
+      "Bash(do sed -i '' 's/package com\\.composerouter/package com.kcm.uirouter/g' \"$file\")",
+      "Bash(done)",
+      "Bash(do sed -i '' 's/import com\\.composerouter\\./import com.kcm.uirouter./g' \"$file\")",
+      "Bash(find:*)",
+      "Bash(ls:*)",
+      "Bash(head:*)",
+      "Bash(./gradlew:*)",
+      "Bash(gradle wrapper:*)",
+      "Bash(curl:*)",
+      "Bash(unzip:*)",
+      "Bash(/tmp/gradle-8.11/bin/gradle wrapper:*)",
+      "Bash(tee:*)",
+      "Bash(adb devices:*)",
+      "Bash(emulator -list-avds:*)",
+      "Bash($HOME/Library/Android/sdk/emulator/emulator -list-avds)",
+      "Bash(adb wait-for-device:*)",
+      "Bash(adb shell:*)",
+      "Bash(xcrun simctl:*)",
+      "Bash(nm:*)",
+      "Bash(xcodebuild -create-xcframework)",
+      "Bash(xcodebuild:*)",
+      "Bash(xcrun simctl install:*)",
+      "Bash(xcrun simctl launch:*)",
+      "Bash(xcrun simctl spawn:*)",
+      "Bash(xcrun simctl io:*)",
+      "Bash(xcrun simctl listapps:*)",
+      "Bash(xcrun simctl uninstall:*)"
+    ]
+  }
+}

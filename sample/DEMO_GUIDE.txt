@@ -1,0 +1,158 @@
+═══════════════════════════════════════════════════════════════════
+              UIRouter for KCM - Demo Guide
+═══════════════════════════════════════════════════════════════════
+
+SAMPLE APP FEATURES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ Tab Navigation (3 tabs with independent stacks)
+✅ Push/Pop Navigation
+✅ Sheet Modal Presentation
+✅ Full-Screen Modal Presentation
+✅ Type-Safe Route Parameters
+✅ Back Button Handling
+✅ State Preservation on Tab Switch
+
+DEMO FLOW
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1️⃣  TAB NAVIGATION
+   - Open app → You're on Home tab
+   - Tap "Explore" tab → Switch to Explore
+   - Tap "Profile" tab → Switch to Profile
+   - Tap "Home" tab → Return to Home
+   - Notice: Navigation state preserved in each tab
+
+2️⃣  PUSH NAVIGATION (Home Tab)
+   - On Home tab, tap any item (e.g., "Item 1")
+   - Details screen opens → Shows item info
+   - Tap back button or swipe → Returns to Home
+   - Try multiple items to build navigation stack
+
+3️⃣  POP TO ROOT
+   - On Home, tap "Item 1" → Details opens
+   - On Details, tap "Pop to Root" button
+   - Returns directly to Home (bypassing stack)
+
+4️⃣  SHEET MODAL
+   - On Home, tap Settings icon (top-right)
+   - Settings sheet slides up from bottom
+   - Toggle switches (Notifications, Dark Mode, etc.)
+   - Dismiss by:
+     a) Tapping outside the sheet
+     b) Tapping "Close Settings" button
+
+5️⃣  FULL-SCREEN MODAL
+   - On Home, scroll down
+   - Tap "Open Image Viewer (Full Screen)" button
+   - Image viewer opens in full screen
+   - Black background, image placeholder shown
+   - Tap "Close Viewer" button to dismiss
+
+6️⃣  EXPLORE TAB NAVIGATION
+   - Switch to Explore tab
+   - Tap any category (e.g., "Technology")
+   - List of items appears
+   - Tap back button → Returns to category grid
+   - Switch to Home tab → Explore state preserved
+   - Return to Explore → Still on item list
+
+7️⃣  PROFILE TAB NAVIGATION
+   - Switch to Profile tab
+   - Tap "Edit Profile" button
+   - Edit screen opens with text fields
+   - Tap "Save Changes" → Returns to Profile
+   - Or tap back button in top-left
+
+8️⃣  SETTINGS FROM PROFILE
+   - On Profile tab
+   - Tap "Settings (Sheet Modal)" button
+   - Same settings sheet opens
+   - Demonstrates modal works from any tab
+
+TESTING CHECKLIST
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Navigation
+  ☐ Switch between all 3 tabs
+  ☐ Push multiple screens in each tab
+  ☐ Pop back one screen
+  ☐ Pop to root from deep stack
+  ☐ Tab switch preserves navigation state
+
+Modals
+  ☐ Open sheet modal
+  ☐ Dismiss sheet by tapping outside
+  ☐ Dismiss sheet by button
+  ☐ Open full-screen modal
+  ☐ Dismiss full-screen modal
+  ☐ Modals work from different tabs
+
+Parameters
+  ☐ Item details show correct ID and title
+  ☐ Category lists show correct category name
+  ☐ Image viewer shows URL parameter
+
+Platform Specific
+  Android:
+    ☐ System back button works
+    ☐ Swipe back gesture works
+    ☐ Rotation preserves state
+
+  iOS:
+    ☐ Swipe back gesture works
+    ☐ Sheet drag to dismiss works
+    ☐ Rotation preserves state
+
+RUNNING THE DEMO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Android (API 34+):
+  ./gradlew :sample:installDebug
+
+iOS (iOS 16+):
+  1. ./gradlew :sample:linkDebugFrameworkIosSimulatorArm64
+  2. Open sample/iosApp/iosApp.xcodeproj in Xcode
+  3. Select iPhone simulator
+  4. Press Run (Cmd+R)
+
+See iOS_SETUP.md for detailed iOS instructions.
+
+KEY CODE EXAMPLES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Route Definition (Routes.kt):
+  sealed class AppRoute(override val routeId: String) : Route {
+      data class Details(val id: String, val title: String) : AppRoute("details") {
+          override val parameters = mapOf("id" to id, "title" to title)
+      }
+  }
+
+Navigation Usage (any screen):
+  val navigator = rememberNavigationController()
+  navigator.push(AppRoute.Details("123", "Title"))
+  navigator.pop()
+  navigator.presentSheet(AppRoute.Settings, dismissible = true)
+  navigator.dismissModal()
+
+Tab Setup (SampleApp.kt):
+  TabRouterHost(tabs, routes, "home") { tabNavigator ->
+      BottomNavigationBar(
+          currentTabId = tabNavigator.currentTabId,
+          onTabSelected = { tabNavigator.switchTab(it) }
+      )
+  }
+
+FILES TO REVIEW
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  sample/src/commonMain/kotlin/com/kcm/uirouter/sample/
+    SampleApp.kt              - Main app with tabs setup
+    Routes.kt                 - All route definitions
+    screens/HomeScreen.kt     - Item list and modals
+    screens/DetailsScreen.kt  - Push/pop demonstration
+    screens/SettingsScreen.kt - Sheet modal example
+
+═══════════════════════════════════════════════════════════════════
+                       Ready to Demo! 🚀
+═══════════════════════════════════════════════════════════════════
