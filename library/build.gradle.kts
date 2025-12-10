@@ -16,12 +16,14 @@ kotlin {
         }
     }
 
-    listOf(
-        iosX64(),
-        iosArm64(),
-        iosSimulatorArm64()
-    ).forEach { iosTarget ->
-        iosTarget.binaries.framework {
+    // iOS targets - these will be published to Maven
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
+
+    // Configure iOS frameworks (optional, for direct framework usage)
+    targets.withType<org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget>().configureEach {
+        binaries.framework {
             baseName = "UIRouterKCM"
             isStatic = true
         }
