@@ -33,7 +33,9 @@
       "Bash(./gradlew :library:publishToMavenLocal:*)",
       "Bash(cat:*)",
       "Bash(./gradlew clean:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(git tag:*)",
+      "Bash(git push:*)"
     ]
   }
 }
