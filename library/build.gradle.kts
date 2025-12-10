@@ -17,13 +17,13 @@ kotlin {
     }
 
     // iOS targets - these will be published to Maven
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
+    val iosX64 = iosX64()
+    val iosArm64 = iosArm64()
+    val iosSimulatorArm64 = iosSimulatorArm64()
 
     // Configure iOS frameworks (optional, for direct framework usage)
-    targets.withType<org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget>().configureEach {
-        binaries.framework {
+    listOf(iosX64, iosArm64, iosSimulatorArm64).forEach { target ->
+        target.binaries.framework {
             baseName = "UIRouterKCM"
             isStatic = true
         }
@@ -76,10 +76,16 @@ android {
 publishing {
     publications {
         withType<MavenPublication> {
+            // Set artifact ID for all publications
+            artifactId = when (name) {
+                "kotlinMultiplatform" -> "uirouter-for-kcm"
+                else -> "uirouter-for-kcm-$name"
+            }
+
             pom {
                 name.set("UIRouter for KCM")
                 description.set("A type-safe routing library for Kotlin Compose Multiplatform")
-                url.set("https://github.com/yourusername/uirouter-for-kcm")
+                url.set("https://github.com/istsest/UIRouter-for-KCM")
 
                 licenses {
                     license {
@@ -90,16 +96,16 @@ publishing {
 
                 developers {
                     developer {
-                        id.set("yourusername")
-                        name.set("Your Name")
-                        email.set("your.email@example.com")
+                        id.set("istsest")
+                        name.set("Joon")
+                        email.set("istsest@gmail.com")
                     }
                 }
 
                 scm {
-                    connection.set("scm:git:git://github.com/yourusername/uirouter-for-kcm.git")
-                    developerConnection.set("scm:git:ssh://github.com/yourusername/uirouter-for-kcm.git")
-                    url.set("https://github.com/yourusername/uirouter-for-kcm")
+                    connection.set("scm:git:git://github.com/istsest/UIRouter-for-KCM.git")
+                    developerConnection.set("scm:git:ssh://github.com/istsest/UIRouter-for-KCM.git")
+                    url.set("https://github.com/istsest/UIRouter-for-KCM")
                 }
             }
         }

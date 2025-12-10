@@ -29,7 +29,8 @@
       "Bash(xcrun simctl spawn:*)",
       "Bash(xcrun simctl io:*)",
       "Bash(xcrun simctl listapps:*)",
-      "Bash(xcrun simctl uninstall:*)"
+      "Bash(xcrun simctl uninstall:*)",
+      "Bash(./gradlew :library:publishToMavenLocal:*)"
     ]
   }
 }
