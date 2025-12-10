@@ -6,9 +6,6 @@ plugins {
     id("maven-publish")
 }
 
-// Set the base name for all artifacts
-project.base.archivesName.set("uirouter-for-kcm")
-
 kotlin {
     androidTarget {
         publishLibraryVariants("release")

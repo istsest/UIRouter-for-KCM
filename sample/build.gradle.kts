@@ -28,7 +28,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(project(":library"))
+                implementation(project(":uirouter-for-kcm"))
                 implementation(compose.runtime)
                 implementation(compose.foundation)
                 implementation(compose.material3)
