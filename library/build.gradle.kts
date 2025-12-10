@@ -77,12 +77,12 @@ afterEvaluate {
     publishing {
         publications {
             withType<MavenPublication> {
-                // Set artifact ID based on publication name
+                // Set artifact ID based on publication name - use lowercase for consistency
                 val publicationName = name
                 artifactId = when {
                     publicationName == "kotlinMultiplatform" -> "uirouter-for-kcm"
                     publicationName.startsWith("android") -> "uirouter-for-kcm-android"
-                    else -> "uirouter-for-kcm-$publicationName"
+                    else -> "uirouter-for-kcm-${publicationName.lowercase()}"
                 }
 
                 pom {
