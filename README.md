@@ -36,7 +36,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("com.github.yourusername:uirouter-for-kcm:1.0.0")
+                implementation("com.github.istsest:uirouter-for-kcm:0.0.1")
             }
         }
     }
