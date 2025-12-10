@@ -30,7 +30,10 @@
       "Bash(xcrun simctl io:*)",
       "Bash(xcrun simctl listapps:*)",
       "Bash(xcrun simctl uninstall:*)",
-      "Bash(./gradlew :library:publishToMavenLocal:*)"
+      "Bash(./gradlew :library:publishToMavenLocal:*)",
+      "Bash(cat:*)",
+      "Bash(./gradlew clean:*)",
+      "Bash(grep:*)"
     ]
   }
 }

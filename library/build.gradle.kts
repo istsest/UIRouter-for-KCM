@@ -6,6 +6,9 @@ plugins {
     id("maven-publish")
 }
 
+// Set the base name for all artifacts
+project.base.archivesName.set("uirouter-for-kcm")
+
 kotlin {
     androidTarget {
         publishLibraryVariants("release")
@@ -73,39 +76,43 @@ android {
     }
 }
 
-publishing {
-    publications {
-        withType<MavenPublication> {
-            // Set artifact ID for all publications
-            artifactId = when (name) {
-                "kotlinMultiplatform" -> "uirouter-for-kcm"
-                else -> "uirouter-for-kcm-$name"
-            }
-
-            pom {
-                name.set("UIRouter for KCM")
-                description.set("A type-safe routing library for Kotlin Compose Multiplatform")
-                url.set("https://github.com/istsest/UIRouter-for-KCM")
-
-                licenses {
-                    license {
-                        name.set("MIT License")
-                        url.set("https://opensource.org/licenses/MIT")
-                    }
+afterEvaluate {
+    publishing {
+        publications {
+            withType<MavenPublication> {
+                // Set artifact ID based on publication name
+                val publicationName = name
+                artifactId = when {
+                    publicationName == "kotlinMultiplatform" -> "uirouter-for-kcm"
+                    publicationName.startsWith("android") -> "uirouter-for-kcm-android"
+                    else -> "uirouter-for-kcm-$publicationName"
                 }
 
-                developers {
-                    developer {
-                        id.set("istsest")
-                        name.set("Joon")
-                        email.set("istsest@gmail.com")
-                    }
-                }
-
-                scm {
-                    connection.set("scm:git:git://github.com/istsest/UIRouter-for-KCM.git")
-                    developerConnection.set("scm:git:ssh://github.com/istsest/UIRouter-for-KCM.git")
+                pom {
+                    name.set("UIRouter for KCM")
+                    description.set("A type-safe routing library for Kotlin Compose Multiplatform")
                     url.set("https://github.com/istsest/UIRouter-for-KCM")
+
+                    licenses {
+                        license {
+                            name.set("MIT License")
+                            url.set("https://opensource.org/licenses/MIT")
+                        }
+                    }
+
+                    developers {
+                        developer {
+                            id.set("istsest")
+                            name.set("Joon")
+                            email.set("istsest@gmail.com")
+                        }
+                    }
+
+                    scm {
+                        connection.set("scm:git:git://github.com/istsest/UIRouter-for-KCM.git")
+                        developerConnection.set("scm:git:ssh://github.com/istsest/UIRouter-for-KCM.git")
+                        url.set("https://github.com/istsest/UIRouter-for-KCM")
+                    }
                 }
             }
         }
