@@ -6,6 +6,6 @@ plugins {
 }
 
 allprojects {
-    group = "com.github.istsest"
+    group = "io.github.istsest"
     version = "0.0.5"
 }

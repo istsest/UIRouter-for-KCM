@@ -35,7 +35,11 @@
       "Bash(./gradlew clean:*)",
       "Bash(grep:*)",
       "Bash(git tag:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(git show:*)",
+      "Bash(./gradlew tasks:*)",
+      "Bash(./deploy-to-pages.sh:*)",
+      "Bash(./deploy-to-pages-fixed.sh)"
     ]
   }
 }

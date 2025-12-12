@@ -3,7 +3,7 @@
 A powerful, type-safe routing library for Kotlin Compose Multiplatform.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![](https://jitpack.io/v/yourusername/uirouter-for-kcm.svg)](https://jitpack.io/#yourusername/uirouter-for-kcm)
+[![Latest Version](https://img.shields.io/badge/version-0.0.5-blue.svg)](https://github.com/istsest/UIRouter-for-KCM/releases)
 
 ## Features
 
@@ -17,14 +17,14 @@ A powerful, type-safe routing library for Kotlin Compose Multiplatform.
 
 ## Installation
 
-Add JitPack repository to your `settings.gradle.kts`:
+Add the Maven repository to your `settings.gradle.kts`:
 
 ```kotlin
 dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven { url = uri("https://jitpack.io") }
+        maven { url = uri("https://istsest.github.io/uirouter-kcm-maven") }
     }
 }
 ```
@@ -36,12 +36,14 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("com.github.istsest:uirouter-for-kcm:0.0.1")
+                implementation("io.github.istsest:uirouter-for-kcm:0.0.5")
             }
         }
     }
 }
 ```
+
+> **Note**: No authentication required! The repository is publicly accessible.
 
 ## Quick Start
 
@@ -319,6 +321,77 @@ Check out the `samples` directory for complete example projects.
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
+## Publishing (for Maintainers)
+
+This library is published to GitHub Pages as a Maven repository. Follow these steps to publish a new version:
+
+### Prerequisites
+
+- macOS (required for iOS compilation)
+- GitHub CLI (`gh`) installed and authenticated
+- JDK 17+
+
+### Initial Setup (One-time)
+
+```bash
+# Create GitHub Pages Maven repository
+./setup-github-pages.sh
+```
+
+This script will:
+1. Create a local Maven repository directory (`~/uirouter-kcm-maven`)
+2. Create a GitHub repository (`uirouter-kcm-maven`)
+3. Enable GitHub Pages for the repository
+
+### Publishing a New Version
+
+1. **Update version** in `build.gradle.kts`:
+   ```kotlin
+   allprojects {
+       group = "io.github.istsest"
+       version = "0.0.6"  // Update version here
+   }
+   ```
+
+2. **Run deployment script**:
+   ```bash
+   ./deploy-to-pages.sh
+   ```
+
+3. **Wait for GitHub Pages** to update (1-2 minutes)
+
+The deployment script automatically:
+- Cleans previous builds
+- Builds all platforms (Android + iOS)
+- Publishes to local Maven
+- Copies artifacts to GitHub Pages repository
+- Creates metadata for all platforms
+- Commits and pushes to GitHub
+
+### Platform Artifacts
+
+Each release includes:
+- **Kotlin Multiplatform metadata** - `uirouter-for-kcm-{version}.module`
+- **Android** - `uirouter-for-kcm-android-{version}.aar`
+- **iOS arm64** - `uirouter-for-kcm-iosarm64-{version}.klib`
+- **iOS x64** - `uirouter-for-kcm-iosx64-{version}.klib`
+- **iOS Simulator arm64** - `uirouter-for-kcm-iossimulatorarm64-{version}.klib`
+
+### Verification
+
+After deployment, verify the artifacts are available:
+
+```bash
+# Check metadata
+curl https://istsest.github.io/uirouter-kcm-maven/io/github/istsest/uirouter-for-kcm/maven-metadata.xml
+
+# Test in a project
+# Add the repository and dependency, then run:
+./gradlew build
+```
+
+For detailed deployment instructions, see [GITHUB_PAGES_MAVEN_GUIDE.md](GITHUB_PAGES_MAVEN_GUIDE.md).
+
 ## License
 
 ```
@@ -347,9 +420,9 @@ SOFTWARE.
 
 ## Support
 
-- 📖 [Documentation](https://github.com/yourusername/uirouter-for-kcm/wiki)
-- 🐛 [Issue Tracker](https://github.com/yourusername/uirouter-for-kcm/issues)
-- 💬 [Discussions](https://github.com/yourusername/uirouter-for-kcm/discussions)
+- 📖 [Documentation](https://github.com/istsest/UIRouter-for-KCM/wiki)
+- 🐛 [Issue Tracker](https://github.com/istsest/UIRouter-for-KCM/issues)
+- 💬 [Discussions](https://github.com/istsest/UIRouter-for-KCM/discussions)
 
 ---
 
